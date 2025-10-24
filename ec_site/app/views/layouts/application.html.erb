@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ec_site</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <style>
+      .nav{background:#f3a01c;padding:10px}
+      .nav a{margin-right:14px;color:#000;text-decoration:underline}
+      .wrap{padding:16px}
+      table{border-collapse:collapse}
+      th,td{border:1px solid #bbb;padding:6px 10px}
+      .field{margin:8px 0}
+    </style>
+  </head>
+  <body>
+    <div class="nav">
+      <% if admin_signed_in? %>
+        <%= link_to "新規書籍", new_admins_book_path %>
+        <%= link_to "新規タグ", new_admins_tag_path %>
+        <%= link_to "タグ一覧", admins_tags_path %>
+        <%= button_to "ログアウト", admins_sign_out_path, method: :delete %>
+      <% elsif user_signed_in? %>
+        <%= link_to "書籍一覧", products_path %>
+        <%= link_to "ユーザーページ", users_mypage_path(current_user) %>
+        <%= button_to "ログアウト", users_sign_out_path, method: :delete %>
+      <% else %>
+        <%= link_to "サインアップ", users_sign_up_path %>
+        <%= link_to "ユーザーログイン", users_sign_in_path %>
+        <%= link_to "管理者ログイン", admins_sign_in_path %>
+      <% end %>
+    </div>
+    <div class="wrap">
+      <%= yield %>
+    </div>
+  </body>
+</html>

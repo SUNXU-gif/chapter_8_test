@@ -1,0 +1,18 @@
+<h2>注文画面</h2>
+<h3>カートの内容</h3>
+<table>
+  <tr><th>書籍名</th><th>数量</th><th>単価</th></tr>
+  <% current_cart.line_items.includes(:book).each do |i| %>
+    <tr>
+      <td><%= i.book.book_name %></td>
+      <td><%= i.quantity %></td>
+      <td><%= number_to_currency(i.price, unit: "¥", precision: 0) %></td>
+    </tr>
+  <% end %>
+</table>
+<h3>送り先</h3>
+<%= form_with url: confirm_orders_path, local: true do |f| %>
+  <%= text_field_tag :delivery_address, "", placeholder: "住所" %>
+  <%= f.submit "注文確認" %>
+<% end %>
+<p><%= link_to "カートに戻る", cart_path %></p>

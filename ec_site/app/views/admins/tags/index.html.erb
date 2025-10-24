@@ -1,0 +1,5 @@
+<h2>タグ一覧</h2>
+<% @tags.each do |t| %>
+  <p>タグ名：<%= t.tag_name %> <%= button_to "タグの削除", admins_tag_path(t), method: :delete %></p>
+<% end %>
+<%= link_to "新規タグ", new_admins_tag_path %>

@@ -1,0 +1,5 @@
+<h2>注文完了</h2>
+<p>ご注文が完了しました。</p>
+<p>注文番号：<%= @order.id %></p>
+<p>注文量：<%= @order.quantity %> 冊</p>
+<p>合計金額：<%= number_to_currency(@order.total, unit: "¥", precision: 0) %></p>

@@ -1,0 +1,18 @@
+<h2>書籍編集</h2>
+<%= form_with model: @book, url: admins_book_path(@book), method: :patch, html: { multipart: true }, local: true do |f| %>
+  <div class="field"><%= f.file_field :image %></div>
+  <div class="field">書籍名<br><%= f.text_field :book_name %></div>
+  <div class="field">著者名<br><%= f.text_field :author_name %></div>
+  <div class="field">発行日<br><%= f.date_select :issue_date %></div>
+  <div class="field">商品表示<br><%= f.check_box :product_display %></div>
+  <div class="field">価格<br><%= f.number_field :price %></div>
+  <div class="field">タグ<br>
+    <% @tags.each do |t| %>
+      <label><%= check_box_tag "book[tag_ids][]", t.id, @book.tags.exists?(t.id) %> <%= t.tag_name %></label>
+    <% end %>
+  </div>
+  <div class="field">ステータス<br><%= f.text_field :status %></div>
+  <%= f.submit "更新" %>
+<% end %>
+<%= link_to "書籍詳細へ戻る", admins_book_path(@book) %> |
+<%= link_to "一覧へ戻る", admins_books_path %>

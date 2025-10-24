@@ -1,0 +1,20 @@
+<h2>注文確認画面</h2>
+<h3>カートの内容</h3>
+<table>
+  <tr><th>書籍名</th><th>数量</th><th>単価</th><th>合計</th></tr>
+  <% @line_items.each do |i| %>
+    <tr>
+      <td><%= i.book.book_name %></td>
+      <td><%= i.quantity %></td>
+      <td><%= number_to_currency(i.price, unit: "¥", precision: 0) %></td>
+      <td><%= number_to_currency(i.price*i.quantity, unit: "¥", precision: 0) %></td>
+    </tr>
+  <% end %>
+</table>
+<p>合計金額：<%= number_to_currency(@total, unit: "¥", precision: 0) %></p>
+<p>送り先：<%= @address %></p>
+<%= form_with url: orders_path, local: true do |f| %>
+  <%= hidden_field_tag :delivery_address, @address %>
+  <%= f.submit "注文確定" %>
+<% end %>
+<p><%= link_to "戻る", new_order_path %></p>

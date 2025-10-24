@@ -1,0 +1,6 @@
+<h2>新規タグ</h2>
+<%= form_with model: @tag, url: admins_tags_path, local: true do |f| %>
+  <div class="field">タグ名<br><%= f.text_field :tag_name %></div>
+  <%= f.submit "登録" %>
+<% end %>
+<%= link_to "一覧へ戻る", admins_tags_path %>

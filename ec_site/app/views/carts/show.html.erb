@@ -1,0 +1,18 @@
+<h2>買い物かご</h2>
+<% total = @line_items.sum { |i| i.price * i.quantity } %>
+<p>合計金額：<%= number_to_currency(total, unit: "¥", precision: 0) %></p>
+<p>合計冊数：<%= @line_items.sum(&:quantity) %> 冊</p>
+<table>
+  <tr><th>書籍名</th><th>数量</th><th>単価</th><th>小計</th><th></th></tr>
+  <% @line_items.each do |i| %>
+    <tr>
+      <td><%= i.book.book_name %></td>
+      <td><%= i.quantity %></td>
+      <td><%= number_to_currency(i.price, unit: "¥", precision: 0) %></td>
+      <td><%= number_to_currency(i.price*i.quantity, unit: "¥", precision: 0) %></td>
+      <td><%= button_to "削除", remove_item_cart_path(line_item_id: i.id), method: :delete, data: { turbo_confirm: "カートから削除しますか？" } %></td>
+    </tr>
+  <% end %>
+</table>
+<p><%= link_to "注文する", new_order_path %> | <%= button_to "カートを空にする", cart_path, method: :delete, data: { turbo_confirm: "カートを空にしますか？" } %></p>
+<p><%= link_to "良い本がないかを検索する", products_path %></p>

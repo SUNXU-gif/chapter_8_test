@@ -1,0 +1,22 @@
+<h2>商品一覧</h2>
+<%= form_with url: products_path, method: :get, scope: nil, local: true do |f| %>
+  <%= f.text_field :keyword, value: params[:keyword] %>
+  <%= select_tag :tag_id, options_for_select([["タグを選択", ""]]+Tag.all.pluck(:tag_name,:id), params[:tag_id]), include_blank: false %>
+  <%= f.submit "検索ボタン" %>
+<% end %>
+<hr>
+<table>
+  <tr><th>書籍名</th><th>著者名</th><th>発行日</th><th>価格</th><th>商品ステータス</th><th></th></tr>
+  <% @books.each do |b| %>
+    <tr>
+      <td><%= b.book_name %></td>
+      <td><%= b.author_name %></td>
+      <td><%= b.issue_date %></td>
+      <td><%= number_to_currency(b.price, unit: "¥", precision: 0) %></td>
+      <td><%= b.status %></td>
+      <td><%= link_to "商品詳細", product_path(b) %></td>
+    </tr>
+  <% end %>
+</table>
+<p><%= link_to "買い物かごを確認する", cart_path %></p>
+s

@@ -1,0 +1,7 @@
+<h2>ログイン</h2>
+<%= form_with url: users_sign_in_path, local: true do |f| %>
+  <div class="field">メールアドレス<br><%= f.text_field :email %></div>
+  <div class="field">パスワード<br><%= f.password_field :password %></div>
+  <%= f.submit "ログイン" %>
+<% end %>
+<p><%= link_to "サインアップ", users_sign_up_path %></p>

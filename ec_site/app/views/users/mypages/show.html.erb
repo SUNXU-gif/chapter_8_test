@@ -1,0 +1,7 @@
+<h2>マイページ</h2>
+<p>あなたのメールアドレスは<br><strong><%= @user.email %></strong><br>です。</p>
+<ul>
+  <li><%= link_to "書籍一覧", products_path %></li>
+  <li><%= link_to "ユーザーページ", users_mypage_path(@user) %></li>
+  <li><%= link_to "ログアウト", users_sign_out_path, data: { turbo_method: :delete } %></li>
+</ul>

@@ -1,0 +1,16 @@
+<h2>書籍新規登録</h2>
+<%= form_with model: @book, url: admins_books_path, html: { multipart: true }, local: true do |f| %>
+  <div class="field"><%= f.file_field :image %></div>
+  <div class="field">書籍名<br><%= f.text_field :book_name %></div>
+  <div class="field">著者名<br><%= f.text_field :author_name %></div>
+  <div class="field">発行日<br><%= f.date_select :issue_date %></div>
+  <div class="field">商品表示<br><%= f.check_box :product_display %></div>
+  <div class="field">価格<br><%= f.number_field :price %></div>
+  <div class="field">タグ<br>
+    <% @tags.each do |t| %>
+      <label><%= check_box_tag "book[tag_ids][]", t.id %> <%= t.tag_name %></label>
+    <% end %>
+  </div>
+  <div class="field">ステータス<br><%= f.text_field :status %></div>
+  <%= f.submit "登録" %>
+<% end %>
